@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: boardgame
-          image: adijaiswal/boardshack:latest
+          image: nyasa/boardshack:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8082
