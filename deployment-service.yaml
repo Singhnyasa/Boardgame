@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: boardgame-deployment
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: boardgame
-  replicas: 2
   template:
     metadata:
       labels:
@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: boardgame
-          image: nyasa/boardshack:latest
+          image: nyasa/boardgame
           imagePullPolicy: Always
           ports:
-            - containerPort: 8082
+            - containerPort: 8080   # internal app port
 
 ---
 apiVersion: v1
@@ -30,6 +30,6 @@ spec:
   type: NodePort
   ports:
     - protocol: TCP
-      port: 8082
-      targetPort: 8082
+      port: 8082        # external port accessible from host
+      targetPort: 8080  # maps to container port
       nodePort: 30082
